@@ -1,11 +1,24 @@
-//THIS IS FROM PREVIOUS HOMEWORK. I JUST PUT THIS HERE TO REMEMBER THE SUCCESSFUL CODE THAT IS RELEVENT.
+//Required needed docs
+const inquirer = require("inquirer");
 
-// TODO: Include packages needed for this application
-const inquirer = require('inquirer');
-const fs = require('fs');
-const generateMarkdown = require('./utils/generateMarkdown.js');
+const Employee = require("./lib/Employee");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
 
-// TODO: Create an array of questions for user input
+const fs = require("fs");
+
+//1 . I need to create initial questions
+//2. Then questions depending on title
+//3. I will need to create functions to call html elements depending on user input.
+//4. It needs to write hrml and css file. 
+
+//NOTES as I think:
+    // Look back at Weather HW to generate cards. 
+    // Could I write CSS into HTML to save the time?
+            //best practices??
+
+            
 const questions = [];
 
 inquirer
@@ -13,66 +26,43 @@ inquirer
         {
             type: 'input',
             name: 'name',
-            message: 'What is your name?',
+            message: 'What is your name?', //change questions
         },
         {
             type: 'input',
             name: 'email',
-            message: 'What is your email?',
+            message: 'What is your email?', //change questions
         },
         {
             type: 'input',
             name: 'username',
-            message: 'What is your Github username?',
+            message: 'What is your Github username?', //change questions
         },
         {
             type: 'input',
             name: 'title',
-            message: 'What is your project title?',
+            message: 'What is your project title?', //change questions
         },
         {
             type: 'input',
             name: 'repo',
-            message: 'What is the link to the repository for this project?',
+            message: 'What is the link to the repository for this project?', //change questions
         },
         {
             type: 'input',
             name: 'deployed',
-            message: 'What is the deployed link to this project?',
+            message: 'What is the deployed link to this project?', //change questions
         },
         {
             type: 'input',
             name: 'desc',
-            message: 'Provide a short description explaining the what, why, and how of your project.',
+            message: 'Provide a short description explaining the what, why, and how of your project.', //change questions
         },
-        {
-            type: 'input',
-            name: 'install',
-            message: 'What are the steps required to install your project?',
-        },
-        {
-            type: 'input',
-            name: 'usage',
-            message: 'Provide instructions and examples for use.',
-        },
-        {
-            type: 'list',
-            name: 'license',
-            message: 'Choose the appropriate license for this project:',
-            choices: ["Apache", "Academic", "GNU", "ISC", "MIT", "Mozilla", "Open"],
-        },
-        {
-            type: 'input',
-            name: 'contributors',
-            message: 'How can others contribute to your project?',
-        },
-        {
-            type: 'input',
-            name: 'test',
-            message: 'List any tests users can run for your application.',
-        },
+       
     ])
 
+
+    //THIS SHOULD STILL BE NEEDED AND RELEVANT - JUST CHANGE TO HTML FILES INSTEAD. 
 
     .then((answers) => {
         const READMEPageContent = generateMarkdown(answers);
