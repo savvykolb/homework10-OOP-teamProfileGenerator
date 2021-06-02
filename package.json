@@ -1,0 +1,27 @@
+{
+  "name": "homework10-oop-teamprofilegenerator",
+  "version": "1.0.0",
+  "description": "## Your Task",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snk923/homework10-OOP-teamProfileGenerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snk923/homework10-OOP-teamProfileGenerator/issues"
+  },
+  "homepage": "https://github.com/snk923/homework10-OOP-teamProfileGenerator#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^8.1.0"
+  }
+}
