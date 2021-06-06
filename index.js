@@ -8,8 +8,7 @@ const Manager = require("./lib/Manager");
 
 const fs = require("fs");
 
-function askPrompts() {
-
+const askPrompts = () => {
 
     inquirer
         .prompt([
@@ -50,24 +49,64 @@ function askPrompts() {
                                 message: "Enter Engineer's GitHub username:",
                             }).then(
                                 function ({ github }) {
-                                    generateEngineer(name, id, email, github)
-                                    addOtherMembers()
+                                    generateEngineer(name, id, email, github) //generateEngineer will be HTML card for engineer.
+                                    addAnotherEmployee();
                                 }
                             )
                         break
-
-}
+                    case "Intern":
+                        inquirer
+                            .prompt({
+                                type: "input",
+                                name: "school",
+                                message: "Enter Intern's current school:",
+                            }).then(
+                                function ({ school }) {
+                                    generateSchool(name, id, email, school) //generateSchool will be HTML card for intern.
+                                    addAnotherEmployee();
+                                }
+                            )
+                        break
+                    case "Manager":
+                        inquirer
+                            .prompt({
+                                type: "input",
+                                name: "officeNumber",
+                                message: "Enter Manager's current office number:",
+                            }).then(
+                                function ({ officeNumber }) {
+                                    generateOfficeNumber(name, id, email, officeNumber) //generateOfficeNumber will be HTML card for manager.
+                                    addAnotherEmployee();
+                                }
+                            )
+                        break
+                }
             })
-                
+}
 
-        
-
-        
-        
+const addAnotherEmployee = () => {
+    inquirer.prompt({
+        type: "confirm",
+        name: "addAnotherEmployee",
+        message: "Would you like to add any more employees to your team?"
+    }).then(({ addAnotherEmployee }) => {
+        console.log('addAnotherEmployee:', addAnotherEmployee);
+        if (addAnotherEmployee) {
+            askPrompts();
+        } else {
+            renderHTML();
+        }
     }
+    )
+    
+    .catch(err => {
+        console.log("ERROR: We could not add another employee to your team.", err)
+        throw err
+    })
+}
 
-    askPrompts()
-        //THIS SHOULD STILL BE NEEDED AND RELEVANT - JUST CHANGE TO HTML FILES INSTEAD. 
+askPrompts()
+        //THIS SHOULD STILL BE NEEDED AND RELEVANT - JUST CHANGE TO HTML FILES INSTEAD.
 
     // .then((answers) => {
     //     const READMEPageContent = generateMarkdown(answers);
