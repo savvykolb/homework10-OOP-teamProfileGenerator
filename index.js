@@ -8,7 +8,7 @@ const Manager = require("./lib/Manager");
 
 const fs = require("fs");
 
-function askPrompts{
+function askPrompts() {
 
 
     inquirer
@@ -42,7 +42,7 @@ function askPrompts{
         .then( //returns a promise - still need to be more comfortable in understanding promises. This link helped https://javascript.info/promise-basics
             function ({ name, id, email, role }) { //refering to the constructor object 
                 switch (role) { //switch statement
-                    case "Engineer"
+                    case "Engineer":
                         inquirer
                             .prompt({
                                 type: "input",
@@ -57,14 +57,16 @@ function askPrompts{
                         break
 
 }
+            })
                 
 
-        )
+        
 
         
         
     }
 
+    askPrompts()
         //THIS SHOULD STILL BE NEEDED AND RELEVANT - JUST CHANGE TO HTML FILES INSTEAD. 
 
     // .then((answers) => {
