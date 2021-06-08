@@ -13,21 +13,6 @@ const fs = require("fs");
 let finalTeamArray = [];
 console.log('finalTeamArray:', finalTeamArray)
 
-// Functions to create each new Constructor
-function createManager(name, id, email, officeNumber) {
-    const manager = new Manager(name, id, email, officeNumber)
-    finalTeamArray.push(manager)
-}
-
-function createEngineer(name, id, email, github) {
-    const engineer = new Engineer(name, id, email, github)
-    renderEngineer(engineer)
-}
-
-function createIntern(name, id, email, school) {
-    const intern = new Intern(name, id, email, school)
-    renderIntern(intern)
-}
 
 const askPrompts = () => {
 
