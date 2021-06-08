@@ -6,11 +6,18 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
+const generateManager = require("./src/manager");
+
 const fs = require("fs");
 
 let finalTeamArray = [];
 console.log('finalTeamArray:', finalTeamArray)
 
+// Functions to create each new Constructor
+function createManager(name, id, email, officeNumber) {
+    const manager = new Manager(name, id, email, officeNumber)
+    finalTeamArray.push(manager)
+}
 
 function createEngineer(name, id, email, github) {
     const engineer = new Engineer(name, id, email, github)
@@ -61,13 +68,10 @@ const askPrompts = () => {
                                 type: "input",
                                 name: "officeNumber",
                                 message: "Enter Manager's current office number:",
-                            }).then(function createManager(name, id, email, officeNumber) {
-                                const manager = new Manager(name, id, email, officeNumber); // Function to create each new Constructor
-                                finalTeamArray.push(manager);
-                                console.log('finalTeamArray:', finalTeamArray)
-                                addAnotherEmployee();
+                            }).then( function ({ github }) {
+                                generateEngineer(name, id, email, github)
                             }
-                            ) 
+                            
                         break
                     case "Engineer":
                         inquirer
@@ -154,3 +158,4 @@ askPrompts()
     //         err ? console.log(err) : console.log('Successfully created README.md!')
     //     );
     // });
+
