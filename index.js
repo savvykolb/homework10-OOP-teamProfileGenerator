@@ -7,6 +7,10 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
 const fs = require("fs");
+const Choices = require("inquirer/lib/objects/choices");
+
+let finalTeamArray = [];
+console.log('finalTeamArray:', finalTeamArray)
 
 const askPrompts = () => {
 
@@ -47,11 +51,15 @@ const askPrompts = () => {
                                 type: "input",
                                 name: "github",
                                 message: "Enter Engineer's GitHub username:",
-                            }).then(
-                                function ({ github }) {
-                                    generateEngineer(name, id, email, github) //generateEngineer will be HTML card for engineer.
-                                    addAnotherEmployee();
-                                }
+                            }).then(function (data) {
+                                const name = data.name
+                                const id = finalTeamArray.length + 1
+                                const email = data.email
+                                const github = data.github
+                                const teamMember = new Engineer(name, id, email, github)
+                                finalTeamArray.push(teamMember)
+                                addAnotherEmployee();
+                            }
                             )
                         break
                     case "Intern":
@@ -60,11 +68,16 @@ const askPrompts = () => {
                                 type: "input",
                                 name: "school",
                                 message: "Enter Intern's current school:",
-                            }).then(
-                                function ({ school }) {
-                                    generateSchool(name, id, email, school) //generateSchool will be HTML card for intern.
-                                    addAnotherEmployee();
-                                }
+                            })
+                            .then(function (data) {
+                                const name = data.name
+                                const id = finalTeamArray.length + 1
+                                const email = data.email
+                                const school = data.school
+                                const teamMember = new Intern(name, id, email, school)
+                                finalTeamArray.push(teamMember)
+                                addAnotherEmployee();
+                            }
                             )
                         break
                     case "Manager":
@@ -73,11 +86,15 @@ const askPrompts = () => {
                                 type: "input",
                                 name: "officeNumber",
                                 message: "Enter Manager's current office number:",
-                            }).then(
-                                function ({ officeNumber }) {
-                                    generateOfficeNumber(name, id, email, officeNumber) //generateOfficeNumber will be HTML card for manager.
-                                    addAnotherEmployee();
-                                }
+                            }).then(function (data) {
+                                const name = data.name
+                                const id = 1
+                                const email = data.email
+                                const officeNumber = data.officeNumber
+                                const teamMember = new Manager(name, id, email, officeNumber)
+                                finalTeamArray.push(teamMember)
+                                addAnotherEmployee();
+                            }
                             )
                         break
                 }
@@ -86,24 +103,24 @@ const askPrompts = () => {
 
 const addAnotherEmployee = () => {
     inquirer.prompt({
-        type: "confirm",
+        type: "list",
         name: "addAnotherEmployee",
-        message: "Would you like to add any more employees to your team?"
-    }).then(({ addAnotherEmployee }) => {
-        console.log('addAnotherEmployee:', addAnotherEmployee);
-        if (addAnotherEmployee) {
-            askPrompts();
-        } else {
-            renderHTML();
+        message: "Would you like to add any more employees to your team?",
+        choices: ["Yes, I have more team members to add.", "No, my team is complete."],
+    }).then(function (data) {
+
+        switch (data.addAnotherEmployee) {
+            case "Yes, I have more team members to add.":
+                askPrompts();
+                break;
+            case "No, my team is complete":
+                compileTeam();
+                break;
         }
-    }
-    )
-    
-    .catch(err => {
-        console.log("ERROR: We could not add another employee to your team.", err)
-        throw err
-    })
+    });
 }
+
+
 
 askPrompts()
         //THIS SHOULD STILL BE NEEDED AND RELEVANT - JUST CHANGE TO HTML FILES INSTEAD.
