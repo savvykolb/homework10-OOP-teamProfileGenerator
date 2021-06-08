@@ -11,6 +11,17 @@ const fs = require("fs");
 let finalTeamArray = [];
 console.log('finalTeamArray:', finalTeamArray)
 
+
+function createEngineer(name, id, email, github) {
+    const engineer = new Engineer(name, id, email, github)
+    renderEngineer(engineer)
+}
+
+function createIntern(name, id, email, school) {
+    const intern = new Intern(name, id, email, school)
+    renderIntern(intern)
+}
+
 const askPrompts = () => {
 
     inquirer
@@ -50,17 +61,13 @@ const askPrompts = () => {
                                 type: "input",
                                 name: "officeNumber",
                                 message: "Enter Manager's current office number:",
-                            }).then(function (data) {
-                                const name = data.name
-                                const id = data.id
-                                const email = data.email
-                                const officeNumber = data.officeNumber
-                                const teamMember = new Manager(name, id, email, officeNumber)
-                                finalTeamArray.push(teamMember)
+                            }).then(function createManager(name, id, email, officeNumber) {
+                                const manager = new Manager(name, id, email, officeNumber); // Function to create each new Constructor
+                                finalTeamArray.push(manager);
                                 console.log('finalTeamArray:', finalTeamArray)
                                 addAnotherEmployee();
                             }
-                            )
+                            ) 
                         break
                     case "Engineer":
                         inquirer
@@ -134,72 +141,6 @@ const addAnotherEmployee = () => {
 
 function compileTeam() {
     console.log("//////////YOUR TEAM IS BEING CREATED!!////////")
-
-    const htmlArray = []
-    const htmlBeginning = `
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>${finalTeamArray[0]}</title>
-    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <style>
-     ${style}
-    </style>
-</head>
-<body>
-    <div class="banner-bar">
-        <h1>${finalTeamArray[0]}</h1>
-    </div>
-    <div class="card-container">
-    `
-    htmlArray.push(htmlBeginning);
-
-    for (let i = 1; i < finalTeamArray.length; i++) {
-        let object = `
-        <div class="member-card">
-            <div class="card-top">
-                <h2>${finalTeamArray[i].name}</h2>
-                <h2>${finalTeamArray[i].title}</h2>
-            </div>
-            <div class="card-bottom">
-                <p>Employee ID: ${finalTeamArray[i].id}</p>
-                <p>Email: <a href="mailto:${finalTeamArray[i].email}">${finalTeamArray[i].email}</a>></p>
-        `
-        if (finalTeamArray[i].officeNumber) {
-            object += `
-            <p>${finalTeamArray[i].officeNumber}</p>
-            `
-        }
-        if (finalTeamArray[i].github) {
-            object += `
-            <p>GitHub: <a href="https://github.com/${finalTeamArray[i].github}">${finalTeamArray[i].github}</a></p>
-            `
-        }
-        if (finalTeamArray[i].school) {
-            object += `
-            <p>School: ${finalTeamArray[i].school}</p>
-            `
-        }
-        object += `
-        </div>
-        </div>
-        `
-        htmlArray.push(object)
-    }
-
-    const htmlEnd = `
-    </div>
-    </body>
-    </html>
-    `
-    htmlArray.push(htmlEnd);
-
-    fs.writeFile(`./dist/${finalTeamArray[0]}.html`, htmlArray.join(""), function (err) {
-
-    })
 }
 
 
