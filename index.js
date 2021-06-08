@@ -176,7 +176,7 @@ const addOrGenerate = () => {
         if (answer.newEmployee === 'Yes, I have more team members to add.') {
             addEmployeePrompts();
         } else {
-            console.log('Your Team Profile has been generated!');
+            console.log('Your Team Profile is ready!!');
             const endHTML = `
             </div>
             </div>
