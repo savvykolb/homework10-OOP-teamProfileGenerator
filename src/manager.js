@@ -33,5 +33,6 @@ function generateManager(manager) {
                     </div>
                 </div>
             </div>`;
+            
 }
 module.exports = generateManager;
