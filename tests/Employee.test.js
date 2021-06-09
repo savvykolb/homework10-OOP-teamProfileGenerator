@@ -38,10 +38,4 @@ describe("Email is recieved through getEmail method", () => {
     })
 })
 
-test("Can get email via getEmail()", () => {
-    const userInput = "jonas@gmail.com";
-    const employee = new Employee('Joe Jonas', '01', userInput);
-    expect(employee.getEmail()).toBe(userInput);
-  });
-
 
