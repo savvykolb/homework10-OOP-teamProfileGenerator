@@ -27,7 +27,7 @@ You will need to fork and open this application and then open your terminal. Onc
 
 Walkthrough Video:
 
-#### NEED TO PLACE VIDEO HERE!!!!!!!
+#### https://drive.google.com/file/d/1KzlFxj5anl8RgvlioDroJwSEI1tCewHe/view?usp=sharing
 
 ## Contributors
  If there is anything users feel would be beneficial to add, please continue to add. 
