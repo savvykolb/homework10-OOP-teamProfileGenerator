@@ -7,19 +7,41 @@ describe("Employee Class should return an object", () => {
     })
 })
 
-//Start with basic test writing if Engineer returns and object
-//Then do a test for each method
+describe("Test for all methods in Employee class", () => {
+    const employee = new Employee('Joe Jonas', '01', 'jonas@gmail.com')
+    it("Should return name", () => {
+        expect(employee.getName()).toBe('Joe Jonas')
+    })
+    it("Should return ID", () => {
+        expect(employee.getId()).toBe('01')
+    })
+    it("Should return email", () => {
+        expect(employee.getEmail()).toBe('jonas@gmail.com')
+    })
+})
 
-//You can do this for each file
-// describe("Employee Class tests for all methods", () => {
-//     const employee = new Employee('Empl O. Yee', '01', 'employee@email.com')
-//     it("Should return name", () => {
-//         expect(employee.getName()).toBe('Empl O. Yee')
-//     })
-//     it("Should return ID", () => {
-//         expect(employee.getId()).toBe('01')
-//     })
-//     it("Should return email", () => {
-//         expect(employee.getEmail()).toBe('employee@email.com')
-//     })
-// })
+describe("Employee class role should always be employee", () => {
+    const userInput = "Employee";
+    const employee = new Employee('Joe Jonas', '01', 'jonas@gmail.com')
+    it("Should return employee role", () => {
+        expect(employee.getRole()).toBe(userInput);
+
+    })
+})
+
+describe("Email is recieved through getEmail method", () => {
+    const userInput = "jonas@gmail.com";
+    const employee = new Employee('Joe Jonas', '01', userInput);
+    it("Should return employee email", () => {
+        expect(employee.getEmail()).toBe(userInput);
+
+    })
+})
+
+test("Can get email via getEmail()", () => {
+    const userInput = "jonas@gmail.com";
+    const employee = new Employee('Joe Jonas', '01', userInput);
+    expect(employee.getEmail()).toBe(userInput);
+  });
+
+
