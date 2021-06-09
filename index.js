@@ -70,7 +70,7 @@ const askPrompts = () => {
     inquirer.prompt(managerPrompts).then((answers) => {
         const manager = new Manager(answers.name, answers.id, answers.officeNumber, answers.email)
         generateManager(manager);
-        addOrGenerate();
+        addEmployeeOrGenerate();
     })
 }
 
@@ -83,7 +83,7 @@ const  addEmployeePrompts= () => {
             const intern = new Intern(answers.name, answers.id, answers.school, answers.email)
             generateIntern(intern)
         }
-        addOrGenerate();
+        addEmployeeOrGenerate();
     })
 }
 
@@ -166,7 +166,7 @@ const generateIntern = (intern) => {
     fs.appendFile('./dist/team.html', renderI, (err) => err ? console.log(err) : '')
 };
 
-const addOrGenerate = () => {
+const addEmployeeOrGenerate = () => {
     inquirer.prompt([{
         type: "list",
         name: "newEmployee",
