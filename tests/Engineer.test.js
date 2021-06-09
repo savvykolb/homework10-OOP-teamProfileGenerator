@@ -35,7 +35,7 @@ describe("Engineer class role should always be engineer", () => {
 
 describe("Username is recieved through getGithub method", () => {
     const userInput = "njonas";
-    const engineer = new Engineer('Nick Jonas', '02', 'jonas@gmail.com', 'njonas');
+    const engineer = new Engineer('Nick Jonas', '02', 'jonas@gmail.com', userInput);
     it("Should return engineer gitHub username", () => {
         expect(engineer.getGithub()).toBe(userInput);
 
