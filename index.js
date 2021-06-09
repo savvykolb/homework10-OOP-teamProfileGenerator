@@ -48,6 +48,11 @@ const employeePrompts = [
     },
     {
         type: 'input',
+        name: 'email',
+        message: "Enter Employees's email address:",
+    },
+    {
+        type: 'input',
         name: 'github',
         message: "Enter Employee's GitHub username:",
         when: (answers) => answers.title === 'Engineer'
@@ -58,17 +63,12 @@ const employeePrompts = [
         message: "Enter Employee's School:",
         when: (answers) => answers.title === 'Intern'
     },
-    {
-        type: 'input',
-        name: 'email',
-        message: "Enter Employees's email address:",
-    },
 ];
 
 
 const askPrompts = () => {
     inquirer.prompt(managerPrompts).then((answers) => {
-        const manager = new Manager(answers.name, answers.id, answers.officeNumber, answers.email)
+        const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
         generateManager(manager);
         addEmployeeOrGenerate();
     })
@@ -77,10 +77,10 @@ const askPrompts = () => {
 const  addEmployeePrompts= () => {
     inquirer.prompt(employeePrompts).then((answers) => {
         if (answers.title === 'Engineer') {
-            const engineer = new Engineer(answers.name, answers.id, answers.github, answers.email)
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
             generateEngineer(engineer);
         } else {
-            const intern = new Intern(answers.name, answers.id, answers.school, answers.email)
+            const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
             generateIntern(intern)
         }
         addEmployeeOrGenerate();
@@ -116,8 +116,8 @@ const generateManager = (manager) => {
                         <h5 class="card-title">${manager.getName()}</h5>
                         <ul>
                             <li>ID: ${manager.getId()}</li>
-                            <li>${manager.getOfficeNumber()}</li>
-                            <li><a href="mailto:${manager.getEmail()}" class="card-link">${manager.getEmail()}</a></li>
+                            <li><a href="mailto:${manager.getEmail()}" class="card-link">Email Address: ${manager.getEmail()}</a></li>
+                            <li>Office Number: ${manager.getOfficeNumber()}</li>
                         </ul>
                     </div>
                 </div>
@@ -130,15 +130,15 @@ const generateEngineer = (engineer) => {
     const renderE = `
     <div class="col">
         <div class="card" style="width: 15rem;">
-            <div class="card-header p-3 mb-2 bg-danger text-white">
+            <div class="card-header p-3 mb-2 bg-success text-white">
                 <h4>Engineer</h4>
             </div>
             <div class="card-body">
                 <h5 class="card-title">${engineer.getName()}</h5>
                 <ul>
                     <li>ID: ${engineer.getId()}</li>
+                    <li><a href="mailto:${engineer.getEmail()}" class="card-link">Email Address: ${engineer.getEmail()}</a></li>
                     <li><a href="https://github.com/${engineer.getGithub()}" target="_blank" class="card-link">GitHub: ${engineer.getGithub()}</a></li>
-                    <li><a href="mailto:${engineer.getEmail()}" class="card-link">${engineer.getEmail()}</a></li>
                 </ul>
             </div>
         </div>
@@ -150,7 +150,7 @@ const generateIntern = (intern) => {
     const renderI = `
     <div class="col">
         <div class="card" style="width: 15rem;">
-            <div class="card-header p-3 mb-2 bg-danger text-white">
+            <div class="card-header p-3 mb-2 bg-info text-white">
                 <h4>Intern</h4>
             </div>
             <div class="card-body">
